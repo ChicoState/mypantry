@@ -20,5 +20,6 @@ class recipeForm(ModelForm):
     class Meta:
         model = recipe
         #ingredients was not working with the forms more investigation is needed
-        exclude = ['ingredients']
-        #fields = "__all__"
+        #exclude = ['ingredients']
+        model.ingredients = ingredient
+        fields = "__all__"

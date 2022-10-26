@@ -1,6 +1,4 @@
 import csv
-import json
-import pprint
 ###     class recipe(models.Model):
 ###         title = models.CharField(max_length=255)
 ###         directions = models.TextField
@@ -27,9 +25,7 @@ with open('recipes.csv', newline='') as f:
     rec_list = []
     one_ingredient = {}
     one_recipe ={}
-    print(row)
     for item in reader:
-        #print("item: ",item)
         #get recipe info
         one_recipe ["title"] = item[0]
         one_recipe ["directions"] = item[1]
@@ -38,10 +34,11 @@ with open('recipes.csv', newline='') as f:
         for x in range(2,59, 3):
             if item[x] :
                 print(item[x+2])
-                one_ingredient ["name"]=item[x+2]
-                one_ingredient ["quantity"]= item[x]
-                one_ingredient ["unit"]= item[x+1]
+                one_ingredient ["name"] = item[x+2]
+                one_ingredient ["quantity"] = item[x]
+                one_ingredient ["unit"] = item[x+1]
             ing_list.append(one_ingredient)
+            one_ingredient = {}
         #add ingredients list to recipe
         one_recipe  ["ingredients"]= ing_list
         one_recipe  ["Category"]=  item[(19*3)+1] # this should be the last row
@@ -50,10 +47,7 @@ with open('recipes.csv', newline='') as f:
         #reset one_recipe
         one_recipe ={}
         ing_list = []
-        break
 
-item = rec_list[0]
-myJSON = json.dumps(item)
 
-# Displaying the JSON format
-print("JSON format = ",myJSON)
+# this is what you want
+# return rec_list

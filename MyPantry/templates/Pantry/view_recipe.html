@@ -4,4 +4,8 @@
 
 <h3>View a specific recipe.</h3>
 
+{% for recipes in all_recipes %}
+    <a href ="{% url 'details' recipes.id %}" ><h1>{{ recipes.title }}</h1></a>
+    <h4>{{ recipes.category }}</h4>
+{% endfor %}
 {% endblock %}

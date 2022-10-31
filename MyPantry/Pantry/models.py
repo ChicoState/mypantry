@@ -12,10 +12,13 @@ class ingredient(models.Model):
     
 class recipe(models.Model):
     title = models.CharField(max_length=255)
-    directions = models.TextField
+    directions = models.TextField()
     content = models.TextField()
-    ingredients = models.ForeignKey(ingredient,on_delete=models.CASCADE)
+    ingredients = models.ForeignKey(ingredient,on_delete=models.CASCADE, null=True)
     category = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.title
 
 class UserModel(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

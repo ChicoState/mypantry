@@ -1,12 +1,15 @@
 from lib2to3.pgen2.tokenize import untokenize
 from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
-from . forms import UserForm, recipeForm, ingredientForm
-from Pantry.models import ingredient, recipe
+from .forms import UserForm, recipeForm, ingredientForm
+from .models import ingredient, recipe
 from django import forms
 from django.contrib.auth.models import User
+
+IMAGE_FILE_TYPES = ['jpg','png']
 
 def home(request):
     return render(request, 'Pantry/dashboard.html')
@@ -68,21 +71,37 @@ def browse(request):
     return render(request, 'Pantry/browse.html')
 
 def viewRecipe(request):
-    return render(request, 'Pantry/view_recipe.html')
+    if not request.user.is_authenticated:
+        return render(request,'Pantry/login.html')
+    else:
+        all_recipes = recipe.objects.all()
+        return render(request, 'Pantry/view_recipe.html', {'all_recipes':all_recipes})
+
+def details(request, recipe_id):
+    recipes = get_object_or_404(recipe, pk=recipe_id)
+    return render(request, 'Pantry/detail.html',{'recipes':recipes})
+
 
 def myRecipes(request):
     return render(request, 'Pantry/saved_recipes.html')
 
+
 #@login_Reqired
 def createRecipe(request):
     #TODO: add the ingredients to the form (see forms.py)
-
-    context={}
-    form = recipeForm(request.POST or None, request.FILES or None)
-    if form.is_valid():
-        form.save()
-    context['form']= form
-    return render(request, 'Pantry/create_recipe.html', context)
+    if not request.user.is_authenticated:
+        return render(request,'Pantry/login.html')
+    else:
+        context={}
+        form = recipeForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            myRec = form.save(commit=False)
+            myRec.user = request.user
+            myRec.save()
+            form.save()
+            return render(request, 'Pantry/view_recipe.html',{'myRec':myRec})
+        context['form']= form
+        return render(request, 'Pantry/create_recipe.html', context)
 
 def updateRecipe(request):
     return render(request, 'Pantry/update_recipe.html')

@@ -22,4 +22,5 @@ class recipeForm(ModelForm):
         #ingredients was not working with the forms more investigation is needed
         #exclude = ['ingredients']
         model.ingredients = ingredient
-        fields = "__all__"
+        #fields = "__all__"
+        fields = ['title','directions','content','category']

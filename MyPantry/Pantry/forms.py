@@ -14,7 +14,7 @@ class UserForm(forms.ModelForm):
 class ingredientForm(ModelForm):
     class Meta:
         model = ingredient
-        fields ="__all__"
+        fields =['name', 'quantity', 'unit']
 
 class recipeForm(ModelForm):
     class Meta:

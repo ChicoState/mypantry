@@ -1,3 +1,4 @@
+from lib2to3.pgen2.tokenize import untokenize
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -5,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from . forms import UserForm, recipeForm, ingredientForm
 from Pantry.models import ingredient, recipe
 from django import forms
+from django.contrib.auth.models import User
 
 def home(request):
     return render(request, 'Pantry/dashboard.html')
@@ -49,7 +51,18 @@ def register(request):
     return render(request, 'Pantry/register.html')
 
 def pantry(request):
-    return render(request, 'Pantry/pantry.html')
+    form = ingredientForm(request.POST or None)
+    if form.is_valid():
+        name = form.cleaned_data["name"]
+        quantity = form.cleaned_data["quantity"]
+        unit = form.cleaned_data["unit"]
+        user = User.objects.get(id=request.user.id)
+        ingredient(user=user, name=name, quantity=quantity, unit=unit).save()
+    context = {
+        "form": form,
+    }
+    return render(request, 'Pantry/pantry.html', context)
+
 
 def browse(request):
     return render(request, 'Pantry/browse.html')

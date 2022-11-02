@@ -1,0 +1,60 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  {% include "bootstrap.html" %}
+  {% load static %}
+  <script src="{%static 'Pantry.js' %}"></script>
+</head>
+
+<body>
+  {% include "navbar.html" %}
+  <div class="jumbotron">
+    <h1>Pantry</h1>
+    {% if not table_data %}
+    </p>There is nothing on your grocery list.</p>
+    {% else %}
+    <table class="table table-striped" border="1">
+      <tr>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Unit</th>
+        <th></th>
+      </tr>
+      {% for row in table_data %}
+      <tr>
+        <td>{{ row.name }}</td>
+        <td>{{ row.quantity }}</td>
+        <td>{{ row.unit }}</td>
+        <td>
+          <a class="btn btn-primary" href="/groceries/edit/{{ row.id }}/">Edit</a>
+          <a class="btn btn-primary" href="#" onclick="confirmDeleteModal({{ row.id }})">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+    <form method="GET" action="/groceries/add/">
+      <input type="submit" class="btn btn-primary" value="Add grocery item">
+    </form>
+  </div>
+  <div id="deleteModal" class="modal fade" role='dialog'>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title">Delete Item</h4>
+        </div>
+        <div class="modal-body">
+          <p>Do you really want to remove this grocery from your list?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <span id='deleteButton'></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

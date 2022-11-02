@@ -1,0 +1,58 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  {% include "bootstrap.html" %}
+  {% load static %}
+  <script src="{%static 'Pantry.js' %}"></script>
+</head>
+
+<body>
+  {% include "navbar.html" %}
+  <div class="jumbotron">
+    <h1>Food Diary Entries</h1>
+    {% if not table_data %}
+    </p>There are no diary entries to display.</p>
+    {% else %}
+    <table class="table table-striped" border="1">
+      <tr>
+        <th>Date</th>
+        <th>Description</th>
+        <th></th>
+      </tr>
+      {% for row in table_data %}
+      <tr>
+        <td>{{ row.datetime }}</td>
+        <td>{{ row.description }}</td>
+        <td>
+          <a class="btn btn-primary" href="/journal/edit/{{ row.id }}/">Edit</a>
+          <a class="btn btn-primary" href="#" onclick="confirmDeleteModal({{ row.id }})">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+    <form method="GET" action="/journal/add/">
+      <input type="submit" class="btn btn-primary" value="Add Diary Entry">
+    </form>
+  </div>
+  <div id="deleteModal" class="modal fade" role='dialog'>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title">Delete Diary Entry</h4>
+        </div>
+        <div class="modal-body">
+          <p>Do you really want to delete this Food Diary Entry?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <span id='deleteButton'></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  {% include "bootstrap.html" %}
+  {% load static %}
+  <script src="{%static 'Pantry.js' %}"></script>
+</head>
+
+<body>
+  {% include "navbar.html" %}
+  <div class="jumbotron">
+    <h1>Recipes</h1>
+    {% if not table_data %}
+    </p>You have no recipes.</p>
+    {% else %}
+    <table class="table table-striped" border="1">
+      <tr>
+        <th>Title</th>
+        <th>Category</th>
+        <th>Directions</th>
+        <th></th>
+      </tr>
+      {% for row in table_data %}
+      <tr>
+        <td>{{ row.title }}</td>
+        <td>{{ row.category }}</td>
+        <td>{{ row.directions }}</td>
+        <td>
+          <a class="btn btn-primary" href="/recipes/edit/{{ row.id }}/">Edit</a>
+          <a class="btn btn-primary" href="#" onclick="confirmDeleteModal({{ row.id }})">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+    <form method="GET" action="/recipes/add/">
+      <input type="submit" class="btn btn-primary" value="Add recipe">
+    </form>
+  </div>
+  <div id="deleteModal" class="modal fade" role='dialog'>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title">Delete Recipe</h4>
+        </div>
+        <div class="modal-body">
+          <p>Do you really want to remove this recipe?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <span id='deleteButton'></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

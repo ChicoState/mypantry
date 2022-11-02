@@ -1,0 +1,35 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  {% include "bootstrap.html" %}
+  {% load static %}
+  <script src="{%static 'Pantry.js' %}"></script>
+</head>
+
+<body>
+  {% include "navbar.html" %}
+  <div class="jumbotron">
+    <h1>Available Recipes</h1>
+    {% if not table_data %}
+    </p>No recipes in system</p>
+    {% else %}
+    <table class="table table-striped" border="1">
+      <tr>
+        <th>Title</th>
+        <th>Category</th>
+        <th>Directions</th>
+      </tr>
+      {% for row in table_data %}
+      <tr>
+        <td>{{ row.title }}</td>
+        <td>{{ row.category }}</td>
+        <td>{{ row.directions }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+  </div>
+</body>
+
+</html>

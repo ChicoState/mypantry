@@ -1,2 +1,6 @@
 django==4.1
+pytest-django
+django-extensions
+cohesion
+pytest-cov
 #python==3.8

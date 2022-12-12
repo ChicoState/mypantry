@@ -17,23 +17,24 @@ from django.contrib import admin
 from django.urls import path
 from Pantry import views as pantry_views
 
+#the name fields were added for test.py these are needed for testing to work
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', pantry_views.home),
-    path('login/', pantry_views.user_login),
-    path('logout/', pantry_views.user_logout),
-    path('join/', pantry_views.join),
-    path('pantry/', pantry_views.pantry),
-    path('pantry/add/', pantry_views.pantry_add),
-    path('pantry/edit/<int:id>/', pantry_views.pantry_edit),
-    path('browse/', pantry_views.browse),
-    path('recipes/', pantry_views.recipes),
-    path('recipes/add/', pantry_views.recipe_add),
+    path('admin/', admin.site.urls, name="admin"),
+    path('', pantry_views.home, name="home"),
+    path('login/', pantry_views.user_login, name="login"),
+    path('logout/', pantry_views.user_logout , name="logout"),
+    path('join/', pantry_views.join, name="join"),
+    path('pantry/', pantry_views.pantry, name="pantry"),
+    path('pantry/add/', pantry_views.pantry_add,  name="pantry_add"), 
+    path('pantry/edit/<int:id>/', pantry_views.pantry_edit, name="pantry_edit"),  #test needed
+    path('browse/', pantry_views.browse, name="browse"),
+    path('recipes/', pantry_views.recipes,  name="recipies"),
+    path('recipes/add/', pantry_views.recipe_add,  name="recipe_add"), #test needed
     path('recipes/edit/<int:id>/', pantry_views.recipe_edit),
-    path('journal/', pantry_views.journal),
-    path('journal/add/', pantry_views.journal_add),
+    path('journal/', pantry_views.journal, name="journal"),  #test needed
+    path('journal/add/', pantry_views.journal_add), #test needed
     path('journal/edit/<int:id>/', pantry_views.journal_edit),
-    path('groceries/', pantry_views.groceries),
-    path('groceries/add/', pantry_views.groceries_add),
+    path('groceries/', pantry_views.groceries, name="groceries"),
+    path('groceries/add/', pantry_views.groceries_add, name="grocery_add"),
     path('groceries/edit/<int:id>/', pantry_views.groceries_edit)
 ]

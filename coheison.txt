@@ -1,0 +1,45 @@
+File: ./read_database.py
+File: ./MyPantry/manage.py
+File: ./MyPantry/MyPantry/asgi.py
+File: ./MyPantry/MyPantry/__init__.py
+File: ./MyPantry/MyPantry/wsgi.py
+File: ./MyPantry/MyPantry/settings.py
+File: ./MyPantry/MyPantry/urls.py
+File: ./MyPantry/Pantry/models.py
+  Class: Recipe (6:0)
+    Total: 0.0%
+  Class: Ingredient (12:0)
+    Total: 0.0%
+  Class: Grocery (19:0)
+    Total: 0.0%
+  Class: JournalEntry (25:0)
+    Total: 0.0%
+File: ./MyPantry/Pantry/apps.py
+  Class: PantryConfig (4:0)
+    Total: 0.0%
+File: ./MyPantry/Pantry/views.py
+File: ./MyPantry/Pantry/tests.py
+File: ./MyPantry/Pantry/forms.py
+  Class: JoinForm (7:0)
+    Total: 0.0%
+  Class: LoginForm (17:0)
+    Total: 0.0%
+  Class: IngredientForm (21:0)
+    Total: 0.0%
+  Class: GroceryForm (29:0)
+    Total: 0.0%
+  Class: RecipeForm (37:0)
+    Total: 0.0%
+  Class: JournalEntryForm (45:0)
+    Total: 0.0%
+  Class: Meta (48:4)
+    Total: 0.0%
+File: ./MyPantry/Pantry/__init__.py
+File: ./MyPantry/Pantry/admin.py
+File: ./MyPantry/Pantry/migrations/0001_initial.py
+  Class: Migration (8:0)
+    Total: 0.0%
+File: ./MyPantry/Pantry/migrations/__init__.py
+File: ./MyPantry/Pantry/migrations/0002_grocery.py
+  Class: Migration (8:0)
+    Total: 0.0%
